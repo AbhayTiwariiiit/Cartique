@@ -9,8 +9,7 @@ export function UserContext({ children }) {
     let {serverURL} = useContext(AuthDataContext);
     const getCurrentUser = async () => {
         try {
-            console.log(`${serverURL}/api/user/getCurrentUser`);
-            let result= await axios.get(`${serverURL}/api/user/getCurrentUser`, { withCredentials: true });
+            let result= await axios.get(serverURL+"/api/user/getCurrentUser", { withCredentials: true });
             setUserData(result.data);
         } catch (error) {
             setUserData(null);

@@ -1,7 +1,8 @@
 import User from "../model/userModel.js"
 import validator from "validator"
 import bcrypt from "bcryptjs"
-import { genToken } from "../config/token.js";
+import { genToken ,genTokenAdmin} from "../config/token.js";
+
 export const registration= async(req,res)=>{
     try{
         const {name,email,password}=req.body;
@@ -20,10 +21,10 @@ export const registration= async(req,res)=>{
         let token=await genToken(user._id)
         res.cookie("token",token,{
             httpOnly:true,
-            maxAge: 900000, 
+            maxAge: 15 * 60 * 1000, 
             secure: false,// When true, the cookie is only sent over HTTPS.Here it’s false, so the cookie will be sent over plain HTTP as well (common in local development). In production, you usually set secure: true so that your token is never sent over an unencrypted connection
             sameSite: "strict",
-        })
+        });
         res.status(201).json(user);
     }
     catch(error){
@@ -49,7 +50,7 @@ export const login=async(req,res)=>{
             maxAge: 900000, 
             secure: false,// When true, the cookie is only sent over HTTPS.Here it’s false, so the cookie will be sent over plain HTTP as well (common in local development). In production, you usually set secure: true so that your token is never sent over an unencrypted connection
             sameSite: "strict",
-        })
+        });
         res.status(201).json({message: "Login Successfull"});
     }
     catch(error){
@@ -75,7 +76,6 @@ export const googleLogin=async(req,res)=>{
         let user=await User.findOne({email});
         if(!user){
             user=await User.create({name,email});
-
         }
         let token=await genToken(user._id)
         res.cookie("token",token,{
@@ -89,5 +89,26 @@ export const googleLogin=async(req,res)=>{
     catch(error){
         console.log("Google Login Error");
         res.status(500).json({message: "Google Login Error"});
+    }
+}
+
+export const adminLogin=async(req,res)=>{
+    try{
+        const {email,password}=req.body;
+        if(email===process.env.ADMIN_EMAIL && password===process.env.ADMIN_PASSWORD){
+            let token=await genTokenAdmin(email);
+            res.cookie("token",token,{
+                httpOnly:true,
+                maxAge: 900000, 
+                secure: false,// When true, the cookie is only sent over HTTPS.Here it’s false, so the cookie will be sent over plain HTTP as well (common in local development). In production, you usually set secure: true so that your token is never sent over an unencrypted connection
+                sameSite: "strict",
+            });
+            return res.status(200).json({message: "Admin Login Successfull"});
+        }
+        return res.status(400).json({message: "Invalid Admin Credentials"});
+    }
+    catch(error){
+        console.log("Admin Login Error");
+        res.status(500).json({message: "Admin Login Error"});
     }
 }

@@ -23,7 +23,6 @@ function Login() {
       let res = await axios.post(serverURL + "/api/auth/login", {
         email, password
       }, { withCredentials: true });
-      console.log(res.data);
       getCurrentUser(); // Fetch the current user data after login
       navigate("/"); // Redirect to home page after successful logi
     }

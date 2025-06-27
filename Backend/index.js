@@ -13,7 +13,7 @@ let app = express();
 app.use(express.json()); //to parse json data
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5173","http://localhost:5174"], //frontend urls
     credentials: true 
 }))
 app.use("/api/auth",authRoutes);//auth routes
