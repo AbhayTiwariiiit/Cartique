@@ -1,7 +1,7 @@
 # Ignore .env and other junk in frontend & backend
 frontend/**/.env
 backend/**/.env
-
+Admi
 frontend/**/node_modules
 backend/**/node_modules
 
