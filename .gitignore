@@ -1,2 +1,15 @@
-# Ignore all .env files in any folder
-*/.env
+# Ignore .env and other junk in frontend & backend
+frontend/**/.env
+backend/**/.env
+
+frontend/**/node_modules
+backend/**/node_modules
+
+frontend/**/dist
+backend/**/dist
+
+frontend/**/*.log
+backend/**/*.log
+
+frontend/**/logs
+backend/**/logs
