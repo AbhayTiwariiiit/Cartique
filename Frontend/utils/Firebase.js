@@ -1,12 +1,12 @@
 import {getAuth, GoogleAuthProvider} from "firebase/auth"
 import { initializeApp } from "firebase/app";
 const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_APIKEY ,
-  authDomain: "loginonecart.firebaseapp.com",
-  projectId: "loginonecart",
-  storageBucket: "loginonecart.firebasestorage.app",
-  messagingSenderId: "242165258894",
-  appId: "1:242165258894:web:0155a2ced93e20073247df"
+  apiKey: import.meta.env.VITE_FIREBASE_APIKEY,
+  authDomain: "auth-157e1.firebaseapp.com",
+  projectId: "auth-157e1",
+  storageBucket: "auth-157e1.firebasestorage.app",
+  messagingSenderId: "644071917422",
+  appId: "1:644071917422:web:cb2e1b942ddc4f1351637f"
 };
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
