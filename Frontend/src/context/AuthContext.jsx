@@ -2,7 +2,7 @@ import React from 'react'
 import { createContext } from 'react'
 export const authDataContext= createContext()
 function AuthContext({children}) {
-    let serverUrl = "https://cartique-lsbc.onrender.com/"
+    let serverUrl = "https://cartiquebackend.onrender.com"
 
     let value = {
        serverUrl
