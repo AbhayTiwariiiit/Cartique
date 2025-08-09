@@ -16,10 +16,20 @@ let app = express()
 
 app.use(express.json())
 app.use(cookieParser())
+const allowedOrigins = ["https://cartique-m0gx.onrender.com", "https://cartiqueadmin.onrender.com"];
+
 app.use(cors({
- origin:["https://cartique-m0gx.onrender.com" , "https://cartiqueadmin.onrender.com"],
- credentials:true
-}))
+  origin: function(origin, callback){
+    // allow requests with no origin (like Postman or curl)
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){
+      var msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  credentials:true
+}));
 app.use("/api/auth",authRoutes)
 app.use("/api/user",userRoutes)
 app.use("/api/product",productRoutes)
