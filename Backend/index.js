@@ -17,7 +17,7 @@ let app = express()
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
- origin:["https://cartiquefrontend.onrender.com" , "https://cartique-1.onrender.com"],
+ origin:["https://cartique-m0gx.onrender.com" , "https://cartiqueadmin.onrender.com"],
  credentials:true
 }))
 app.get("/", (req, res) => res.send("Backend is running"));
