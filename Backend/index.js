@@ -20,7 +20,6 @@ app.use(cors({
  origin:["https://cartique-m0gx.onrender.com" , "https://cartiqueadmin.onrender.com"],
  credentials:true
 }))
-app.get("/", (req, res) => res.send("Backend is running"));
 app.use("/api/auth",authRoutes)
 app.use("/api/user",userRoutes)
 app.use("/api/product",productRoutes)
